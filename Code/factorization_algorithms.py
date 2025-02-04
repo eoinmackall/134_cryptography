@@ -35,25 +35,30 @@ def PollardRho2(m, s=None):
     Works by implementing Pollard's rho algorithm using polynomial x^2+1 for
     recursively defined sequence. 
     """
+
+    #Setup
     n=abs(m)
 
     if n<=2:
         return (False, m)
 
     if s == None:
-        s=random.randrange(1,n)
+        s=random.randrange(2,n)
 
+    #Function for computing recursive rho sequence
     def f(x):
         return (x**2 + 1) % n
 
+
+    #The main algorithm for finding divisors
     x = s
     y = s
     d = 1
     i = 0
 
     while d == 1 and i<=1:
-        x = f(x)
-        y = f(f(y))
+        x = f(x) #calculates x_i
+        y = f(f(y)) #calculates x_{2i}
         d = pr.EuclideanAlgorithm(x - y, n)
         if d == n:
             d=1

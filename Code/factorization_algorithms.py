@@ -26,7 +26,7 @@ def TrialDivision(m):
     return (False, n)
 
 
-def PollardRho2(m, s=None):
+def PollardRho(m, s=None):
     """
     Input: an integer m, a seed s (if no seed specified, then a random seed is used)
     Output: Boolean-integer pair. If m is composite, returns (True, d)

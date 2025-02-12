@@ -113,7 +113,7 @@ def MillerRabin(q, a=None):
 
     #Eliminating even q    
     if q % 2 == 0:
-        return False #q is even
+        return (False, q) #q is even
     
     #Select base for test, if none given as input
     if a == None:

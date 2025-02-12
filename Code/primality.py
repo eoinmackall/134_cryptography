@@ -151,12 +151,12 @@ def SmallPrime(k=10):
     p=random.randrange((10**148)-1,(10**154)+1,2)
     prime = False
     while not prime:
+        p+=2
         (prime, div)=MillerRabin(p)
         for i in range(k):
             (prime, div)=MillerRabin(p)
             if not prime:
                 break
-        p+=2
     
     if EuclideanAlgorithm(557940830126698960967415390,p)!=1: #Calculates gcd of p and product of first 20 primes
         p=SmallPrime(k)
@@ -171,12 +171,12 @@ def BigPrime(k=10):
     p=random.randrange((10**158)-1,(10**164)+1,2)
     prime = False
     while not prime:
+        p+=2
         (prime, div)=MillerRabin(p)
         for i in range(k):
             (prime, div)=MillerRabin(p)
             if not prime:
                 break
-        p+=2
     
     if EuclideanAlgorithm(557940830126698960967415390,p)!=1: #Calculates gcd of p and product of first 20 primes
         p=BigPrime(k)

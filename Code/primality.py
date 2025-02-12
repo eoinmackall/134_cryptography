@@ -132,16 +132,16 @@ def MillerRabin(q, a=None):
     s=FastModularExp(a,m,q)
     
     if (s == 1 or s == q-1):
-        return True #q is probably prime
+        return (True, q) #q is probably prime
     else:
         for i in range(k-1):
             t=s**2 % q
             if t == 1:
-                return False, EuclideanAlgorithm(s-1,q) #q is composite, returns a divisor of q
+                return (False, EuclideanAlgorithm(s-1,q)) #q is composite, returns a divisor of q
             elif t == q-1: #q is probably prime
-                return True
+                return (True, q)
             s=t
-    return False #q is composite, but no divisor found
+    return (False, q) #q is composite, but no divisor found
 
 
 def SmallPrime(k=10):
@@ -149,14 +149,14 @@ def SmallPrime(k=10):
     Input is an integer k determining security; larger k values increases likelihood to be prime."""
 
     p=random.randrange((10**148)-1,(10**154)+1,2)
-    prime=MillerRabin(p)
+    prime = False
     while not prime:
-        p+=2
+        (prime, div)=MillerRabin(p)
         for i in range(k):
-            prime=MillerRabin(p)
+            (prime, div)=MillerRabin(p)
             if not prime:
                 break
-        prime=MillerRabin(p)
+        p+=2
     
     if EuclideanAlgorithm(557940830126698960967415390,p)!=1: #Calculates gcd of p and product of first 20 primes
         p=SmallPrime(k)
@@ -169,13 +169,14 @@ def BigPrime(k=10):
         Input is an integer k determining security; larger k values increases likelihood to be prime."""
     
     p=random.randrange((10**158)-1,(10**164)+1,2)
-    prime=MillerRabin(p)
+    prime = False
     while not prime:
-        p+=2
+        (prime, div)=MillerRabin(p)
         for i in range(k):
-            prime=MillerRabin(p)
+            (prime, div)=MillerRabin(p)
             if not prime:
                 break
+        p+=2
     
     if EuclideanAlgorithm(557940830126698960967415390,p)!=1: #Calculates gcd of p and product of first 20 primes
         p=BigPrime(k)

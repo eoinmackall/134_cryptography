@@ -1,7 +1,7 @@
 import string
 
 def shift_cipher(k,st):
-    """Iplements a shift cipher with shift k on string st"""
+    """Implements a shift cipher with shift k on string st"""
 
     a_to_n=dict(zip(string.ascii_lowercase, range(0,26)))
     n_to_a={a_to_n[i]:i for i in a_to_n}
